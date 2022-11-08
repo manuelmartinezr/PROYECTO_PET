@@ -1,4 +1,3 @@
-
 import pygame
 from display import *
 from sys import exit
@@ -94,7 +93,7 @@ def options():
                 elif event.key == pygame.K_RETURN:
                     if user_text in list_of_pets:
                         new_pet = get_pet(pet_classes, user_text)
-                        print (new_pet.__class__)
+                        #call function to display screen with the pet
                 else:
                     user_text += event.unicode
                 
@@ -102,27 +101,3 @@ def options():
         clock.tick(60)
 
 start()
-"""""
-gameNotActive = True
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if(startbtn_rect.collidepoint(event.pos)):
-            
-                gameNotActive = False
-    #if game is not active, then display start screen
-    if gameNotActive:
-        screen.blit(background, (0,0))
-        screen.blit(startmsg_surf, startmsg_rect)
-        screen.blit(startbtn_surf, startbtn_rect)
-        pygame.display.update()
-        clock.tick(60)
-    #if game is active, display the game
-    else:
-        screen.blit(background, (0,0))
-        pygame.display.update()
-        clock.tick(60)
-"""""
