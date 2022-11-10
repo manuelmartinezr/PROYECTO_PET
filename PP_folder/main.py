@@ -1,9 +1,9 @@
 import pygame
 from display import *
 from sys import exit
-from User import User
-from Button import Button
-from Pet import *
+from user import User
+from button import Button
+from pet import Pet, Python
 
 pygame.init()
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -22,7 +22,7 @@ startbtn_rect = startbtn_surf.get_rect(center = (250, 300))
 def get_font(size): # Returns Press-Start-2P in the desired size
     return pygame.font.Font('/Users/manuel/Documents/font/Pixeltype.ttf', size)
 
-def get_pet(pet_classes: List[Pet], user_input: str):
+def get_pet(pet_classes: list[Pet], user_input: str):
     for pet_class in pet_classes:
             if pet_class.desc.lower() == user_input.lower():
                 new_pet = pet_class
@@ -68,7 +68,6 @@ def options():
     input_rect = pygame.Rect(200, 250, 150, 32)
 
     while True:
-        OPT_MOUSE_POS = pygame.mouse.get_pos()
         SCREEN.blit(BG, (0,0))
 
         OPT_TEXT = get_font(45).render('List of available pets: ' + list_of_pets, False, 'Black')
@@ -94,9 +93,42 @@ def options():
                     if user_text in list_of_pets:
                         new_pet = get_pet(pet_classes, user_text)
                         #call function to display screen with the pet
+                        settings(new_pet)
                 else:
                     user_text += event.unicode
-                
+
+        pygame.display.update()
+        clock.tick(60)
+
+def settings(new_pet):
+    user_text = ''
+
+    input_rect = pygame.Rect(200, 250, 150, 32)
+
+    while True:
+        OPT_MOUSE_POS = pygame.mouse.get_pos()
+        SCREEN.blit(BG, (0,0))
+        STG_TEXT = get_font(45).render('Enter your name:', False, 'Black')
+        STG_RECT = STG_TEXT.get_rect(center=(250, 150))
+        SCREEN.blit(STG_TEXT, STG_RECT)
+        
+        pygame.draw.rect(SCREEN, 'Black', input_rect, 2)
+        user_text_surf = get_font(45).render(user_text, False, 'Black' )
+        SCREEN.blit(user_text_surf, (input_rect.x + 5, input_rect.y + 5))
+        input_rect.w = max(100, user_text_surf.get_width() + 10)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_text = user_text[:-1]
+                elif event.key == pygame.K_RETURN:
+                    user = User(user_text)
+                else:
+                    user_text += event.unicode
+
         pygame.display.update()
         clock.tick(60)
 

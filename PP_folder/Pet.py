@@ -1,5 +1,5 @@
 from pip import List
-from Stats_Bar import Stats_Bar
+from stats_bar import Stats_Bar
 from abc import ABC, abstractmethod
 import random
 
@@ -9,9 +9,9 @@ class Pet(ABC):
         self._sex = random.choice(['male', 'female'])
 
     _desc : str
-    _pet_idle : List
-    _pet_eating : List
-    _pet_playing: List
+    _pet_idle : list
+    _pet_eating : list
+    _pet_playing: list
     
     @property
     def name(self):
