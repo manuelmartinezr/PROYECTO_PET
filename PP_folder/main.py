@@ -93,14 +93,14 @@ def options():
                     if user_text in list_of_pets:
                         new_pet = get_pet(pet_classes, user_text)
                         #call function to display screen with the pet
-                        settings(new_pet)
+                        user_settings(new_pet)
                 else:
                     user_text += event.unicode
 
         pygame.display.update()
         clock.tick(60)
 
-def settings(new_pet):
+def user_settings(new_pet):
     user_text = ''
 
     input_rect = pygame.Rect(200, 250, 150, 32)
@@ -126,6 +126,39 @@ def settings(new_pet):
                     user_text = user_text[:-1]
                 elif event.key == pygame.K_RETURN:
                     user = User(user_text)
+                    pet_settings(user, new_pet)
+                else:
+                    user_text += event.unicode
+
+        pygame.display.update()
+        clock.tick(60)
+
+def pet_settings(user, new_pet):
+    user_text = ''
+
+    input_rect = pygame.Rect(200, 250, 150, 32)
+
+    while True:
+        SCREEN.blit(BG, (0,0))
+        STG_TEXT = get_font(45).render("Enter your pet's name:", False, 'Black')
+        STG_RECT = STG_TEXT.get_rect(center=(250, 150))
+        SCREEN.blit(STG_TEXT, STG_RECT)
+        
+        pygame.draw.rect(SCREEN, 'Black', input_rect, 2)
+        user_text_surf = get_font(45).render(user_text, False, 'Black' )
+        SCREEN.blit(user_text_surf, (input_rect.x + 5, input_rect.y + 5))
+        input_rect.w = max(100, user_text_surf.get_width() + 10)
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_BACKSPACE:
+                    user_text = user_text[:-1]
+                elif event.key == pygame.K_RETURN:
+                    user.Pet = new_pet
+                    user.Pet.name = user_text
                 else:
                     user_text += event.unicode
 
