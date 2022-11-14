@@ -2,6 +2,7 @@ from pip import List
 from stats_bar import Stats_Bar
 from abc import ABC, abstractmethod
 import random
+import pygame
 
 class Pet(ABC):
     def __init__(self, name) -> None:
@@ -9,7 +10,7 @@ class Pet(ABC):
         self._sex = random.choice(['male', 'female'])
 
     _desc : str
-    _pet_idle : list
+    _pet_idle : dict
     _pet_eating : list
     _pet_playing: list
     
@@ -46,7 +47,8 @@ class Python(Pet):
         super().__init__(name)
 
     desc = 'Python'
-    _pet_idle = []
+    _pet_idle = dict(pet_idle1 = pygame.image.load('/Users/manuel/Documents/piskel1new.png'),
+                 pet_idle2 = pygame.image.load('/Users/manuel/Documents/secondpiskel.png'))
     _pet_eating = []
     _pet_playing = []
 
