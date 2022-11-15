@@ -8,21 +8,16 @@ from classes.pet import Pet, Python
 from classes.stats_bar import Stats_Bar
 
 pygame.init()
-SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Posada-Plays Co')
 clock = pygame.time.Clock()
-font = pygame.font.Font('PP_folder/assets/Pixeltype.ttf', 50)
 
+SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 BG = pygame.Surface((WIDTH, HEIGHT))
 BG.fill(GREEN)
-startmsg_surf = font.render('Welcome to PyPet!', False, 'Black')
-startmsg_rect = startmsg_surf.get_rect(center = (250, 100))
 
-startbtn_surf = font.render('Start', False, 'Black')
-startbtn_rect = startbtn_surf.get_rect(center = (250, 300))
 idle_index = 0
 
-def get_font(size): # Returns Press-Start-2P in the desired size
+def get_font(size): # Returns Press-Start-2P font in the desired size
     return pygame.font.Font('PP_folder/assets/Pixeltype.ttf', size)
 
 def get_pet(pet_classes: list[Pet], user_input: str):
@@ -35,7 +30,6 @@ def idle_animation(pet_idle):
     global pet_surf, idle_index
     idle_index += 0.1
     if idle_index >= len(pet_idle) : idle_index = 0
-
 
 def start():
 
