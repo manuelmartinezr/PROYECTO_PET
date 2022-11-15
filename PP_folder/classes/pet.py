@@ -1,5 +1,3 @@
-from pip import List
-from stats_bar import Stats_Bar
 from abc import ABC, abstractmethod
 import random
 import pygame

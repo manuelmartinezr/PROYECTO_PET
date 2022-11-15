@@ -1,16 +1,17 @@
 import pygame
+
 from display import *
 from sys import exit
-from user import User
-from button import Button
-from pet import Pet, Python
-from stats_bar import Stats_Bar
+from classes.user import User
+from classes.button import Button
+from classes.pet import Pet, Python
+from classes.stats_bar import Stats_Bar
 
 pygame.init()
 SCREEN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Posada-Plays Co')
 clock = pygame.time.Clock()
-font = pygame.font.Font('/Users/manuel/Documents/font/Pixeltype.ttf', 50)
+font = pygame.font.Font('PP_folder/assets/Pixeltype.ttf', 50)
 
 BG = pygame.Surface((WIDTH, HEIGHT))
 BG.fill(GREEN)
@@ -22,7 +23,7 @@ startbtn_rect = startbtn_surf.get_rect(center = (250, 300))
 idle_index = 0
 
 def get_font(size): # Returns Press-Start-2P in the desired size
-    return pygame.font.Font('/Users/manuel/Documents/font/Pixeltype.ttf', size)
+    return pygame.font.Font('PP_folder/assets/Pixeltype.ttf', size)
 
 def get_pet(pet_classes: list[Pet], user_input: str):
     for pet_class in pet_classes:
@@ -186,11 +187,11 @@ def game(user):
         pet_surf = pet_idle[int(idle_index)].convert_alpha()
         pet_rect = pet_surf.get_rect(center = (250, 300))
         
-        PLAY_BTN = Button(image=pygame.image.load('/Users/manuel/Documents/toyicon1.png'), pos=(400, 50), 
+        PLAY_BTN = Button(image=pygame.image.load('PP_folder/assets/toyicon1.png'), pos=(400, 50), 
                             text_input='', font= get_font(45), base_color='Black', hovering_color='Gray' )
         PLAY_BTN.update(SCREEN)
 
-        FOOD_BTN = Button(image=pygame.image.load('/Users/manuel/Documents/foodicon1.png'), pos=(400, 150), 
+        FOOD_BTN = Button(image=pygame.image.load('PP_folder/assets/foodicon1.png'), pos=(400, 150), 
                             text_input='', font= get_font(45), base_color='Black', hovering_color='Gray' )
         FOOD_BTN.update(SCREEN)
 
@@ -207,20 +208,19 @@ def game(user):
                     stats.update_bored_stat(-200)
                 if FOOD_BTN.checkForInput(PLAY_MOUSE_POS) and stats._hungry_stat>200:
                     stats.update_hungry_stat(-200)
-        print(stats._hungry_stat)
 
         if stats._hungry_stat > 253:
-            game_over()
+            game_over(user)
 
         pygame.display.update()
         clock.tick(20)
 
-def game_over():
+def game_over(user):
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         SCREEN.blit(BG, (0,0))
         
-        PLAY_TEXT = get_font(45).render('Tu mascota se fue a un mejor lugar', False, 'Black')
+        PLAY_TEXT = get_font(45).render(user.Pet.name +  ' se fue a un mejor lugar', False, 'Black')
         PLAY_RECT = PLAY_TEXT.get_rect(center=(250, 150))
         SCREEN.blit(PLAY_TEXT, PLAY_RECT)
 
