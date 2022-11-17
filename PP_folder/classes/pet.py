@@ -5,13 +5,13 @@ import pygame
 
 class Pet(ABC):
     def __init__(self, name: str) -> None:
-        self._name = name
-        self._sex = random.choice(['male', 'female'])
+        self._name = name # Pet's name
+        self._sex = random.choice(['male', 'female']) # Pet's sex
 
-    _desc : str
-    _idle_animation : dict
-    _eating_animation : dict
-    _playing_animation: dict
+    _desc : str # Type of pet
+    _idle_animation : dict # Dict with pet's idle animation
+    _eating_animation : dict # Dict with pet's eating animation
+    _playing_animation: dict # Dict with pet's playing animation
     
     @property
     def name(self) -> str:
@@ -42,9 +42,15 @@ class Pet(ABC):
         return self._playing_animation
 
     def eat(self, stats_bar: Stats_Bar) -> None:
+        '''
+        Update's the pet's hunger stat by a set amount
+        '''
         stats_bar.update_hungry_stat(-200)
 
     def play(self, stats_bar: Stats_Bar) -> None:
+        '''
+        Update's the pet's boredom stat by a set amount
+        '''
         stats_bar.update_bored_stat(-200)
 
 class Python(Pet):

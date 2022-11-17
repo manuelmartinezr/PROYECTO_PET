@@ -14,16 +14,25 @@ class Button():
 		self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 
 	def update(self, screen):
+		'''
+		Blits the button on the screen
+		'''
 		if self.image is not None:
 			screen.blit(self.image, self.rect)
 		screen.blit(self.text, self.text_rect)
 
 	def checkForInput(self, position):
+		'''
+		Checks if user has pressed the button
+		'''
 		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
 			return True
 		return False
 
 	def changeColor(self, position):
+		'''
+		Changes button's color when user hovers over it
+		'''
 		if position[0] in range(self.rect.left, self.rect.right) and position[1] in range(self.rect.top, self.rect.bottom):
 			self.text = self.font.render(self.text_input, True, self.hovering_color)
 		else:
