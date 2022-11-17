@@ -19,7 +19,7 @@ BG.fill(GREEN)
 idle_index = 0 # For idle animation
 
 def get_font(size): # Returns Press-Start-2P font in the desired size
-    return pygame.font.Font('PP_folder/assets/Pixeltype.ttf', size)
+    return pygame.font.Font('PP_folder/assets/font/Pixeltype.ttf', size)
 
 def get_pet(pet_classes: list[Pet], user_input: str) -> Pet:
     for pet_class in pet_classes:
@@ -178,10 +178,10 @@ def show_game(user: User) -> None:
         pet_surf = idle_list[int(idle_index)].convert_alpha()
         pet_rect = pet_surf.get_rect(center = (250, 300))
         
-        PLAY_BTN = Button(image=pygame.image.load('PP_folder/assets/toyicon1.png'), pos=(400, 50), 
+        PLAY_BTN = Button(image=pygame.image.load('PP_folder/assets/icons/toyicon1.png'), pos=(400, 50), 
                             text_input='', font= get_font(45), base_color='Black', hovering_color='Gray' )
         PLAY_BTN.update(SCREEN)
-        FOOD_BTN = Button(image=pygame.image.load('PP_folder/assets/foodicon1.png'), pos=(400, 150), 
+        FOOD_BTN = Button(image=pygame.image.load('PP_folder/assets/icons/foodicon1.png'), pos=(400, 150), 
                             text_input='', font= get_font(45), base_color='Black', hovering_color='Gray' )
         FOOD_BTN.update(SCREEN)
 
