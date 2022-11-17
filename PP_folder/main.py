@@ -20,7 +20,7 @@ idle_index = 0
 def get_font(size): # Returns Press-Start-2P font in the desired size
     return pygame.font.Font('PP_folder/assets/Pixeltype.ttf', size)
 
-def get_pet(pet_classes: list[Pet], user_input: str):
+def get_pet(pet_classes: list[Pet], user_input: str) -> Pet:
     for pet_class in pet_classes:
             if pet_class.desc.lower() == user_input.lower():
                 new_pet = pet_class
@@ -32,7 +32,6 @@ def idle_animation(pet_idle):
     if idle_index >= len(pet_idle) : idle_index = 0
 
 def start():
-
     while True:
         PLAY_MOUSE_POS = pygame.mouse.get_pos()
         SCREEN.blit(BG, (0,0))
@@ -53,9 +52,6 @@ def start():
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_START.checkForInput(PLAY_MOUSE_POS):
-                    #here is where u call function that will display screen
-                    #for user to create the pet
-                    #put the imgs and fonts in a local folder 
                     options()
 
         pygame.display.update()
@@ -171,7 +167,7 @@ def pet_settings(user, new_pet):
         clock.tick(60)
 
 def game(user):
-    pet_idle = [user.Pet._pet_idle['pet_idle1'], user.Pet._pet_idle['pet_idle2']]
+    pet_idle = [user.Pet.idle_animation['pet_idle1'], user.Pet.idle_animation['pet_idle2']]
     pet_surf = pet_idle[int(idle_index)].convert_alpha()
     stats = Stats_Bar()
     while True:
