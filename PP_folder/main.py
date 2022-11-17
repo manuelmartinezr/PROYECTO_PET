@@ -209,9 +209,9 @@ def show_game(user: User) -> None:
                 exit()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if PLAY_BTN.checkForInput(PLAY_MOUSE_POS) and stats.hungry_stat >200:
-                    user.Pet.eat(stats)
-                if FOOD_BTN.checkForInput(PLAY_MOUSE_POS) and stats.bored_stat > 200:
                     user.Pet.play(stats)
+                if FOOD_BTN.checkForInput(PLAY_MOUSE_POS) and stats.bored_stat > 200:
+                    user.Pet.eat(stats)
 
         if stats.hungry_stat > 253 or stats.bored_stat > 253:
             show_end(user)
@@ -244,5 +244,6 @@ def show_end(user) -> None:
 
         pygame.display.update()
         clock.tick(60)
+
 
 show_start()
