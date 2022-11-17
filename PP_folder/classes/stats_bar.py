@@ -3,6 +3,14 @@ class Stats_Bar:
         self._hungry_stat = 250
         self._bored_stat = 250
     
+    @property
+    def hungry_stat(self) -> int:
+        return self._hungry_stat
+
+    @property
+    def bored_stat(self) -> int:
+        return self._bored_stat
+        
     def update_hungry_stat(self, amount: int) -> None:
         self._hungry_stat += amount
 
